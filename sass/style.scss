@@ -1,0 +1,88 @@
+
+/////////////////////////
+//    Puzzle game
+/////////////////////////
+
+@import "compass";
+
+@mixin stripes($color: #B99F82) {
+  background-color: $color;
+  background-image: linear-gradient(90deg, rgba(#fff,.07) 50%, transparent 50%),
+  linear-gradient(90deg, rgba(#fff,.13) 50%, transparent 50%),
+  linear-gradient(90deg, transparent 50%, rgba(#fff,.17) 50%),
+  linear-gradient(90deg, transparent 50%, rgba(#fff,.19) 50%);
+  background-size: 13px, 29px, 37px, 53px;
+}
+
+html,
+body,
+.game {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  opacity: 0;
+  @include transition(opacity, 1s);
+  @include stripes;
+  &.loaded {
+    opacity: 1;
+  }
+}
+
+.game {
+  position: relative;
+  padding: 40px 30px;
+  @include box-sizing(border-box);
+  .puzzle-solution {
+    position: relative;
+    border: 7px solid transparent;
+    background: #fff;
+    @include background-clip(padding-box);
+    @include box-shadow(0px 0px 8px rgba(#000, .7) inset, 0px 0px 15px rgba(#000, .7));
+    @include border-radius(5px);
+  }
+  .puzzle-spot {
+    @include box-sizing(border-box);
+    border: 3px double #d0d0d0;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .puzzle-item {
+    position: absolute;
+    @include box-shadow(0px 0px 10px rgba(#000, .6));
+    @include transition(opacity .4s);
+    z-index: 2 !important;
+    &.ui-state-disabled {
+      @include opacity(.75);
+      @include box-shadow(none);
+      z-index: 1 !important;
+    }
+    &.ui-draggable-dragging {
+      z-index: 3 !important;
+    }
+    &.game-complete {
+      @include opacity(1);
+    }
+  }
+  .well-done {
+    display: table;
+    font-size: 100px;
+    font-weight: bold;
+    font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+    letter-spacing: -4px;
+    color: rgba(#fff, .6);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 9;
+    span {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+}
