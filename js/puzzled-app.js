@@ -65,6 +65,7 @@
     });
 
     $('span.rand').mouseup(function () {
+      $('form input#img').val('');
       typewatch(function () {
         updateGameSrc();
       }, 500);
