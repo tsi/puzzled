@@ -48,14 +48,14 @@ form {
     font-size: 36px;
     line-height: 40px;
     vertical-align: middle;
-    margin: 0 15px;
+    margin: 0 30px;
     font-style: italic;
   }
 }
 
 input {
   padding: 3px 6px;
-  margin: 10px;
+  margin: 10px 20px 10px 0;
   font-size: 14px;
   color: lighten($baseColor, 30%);
   background: #444;
@@ -70,4 +70,50 @@ input {
 
 #game {
   margin-top: 3%;
+}
+
+.share {
+  position: fixed;
+  bottom: 0;
+  right: 10%;
+  margin-left: -300px;
+  z-index: 9;
+  width: 280px;
+  font-size: 15px;
+  color: lighten($baseColor, 30%);
+  font-weight: bold;
+  background: #333;
+  @include transition(all, .4s);
+  @include transform(translateY(100%));
+  @include border-radius(6px 0 0 0);
+  @include box-shadow(0 0 13px #333);
+  &:hover {
+    @include transform(translateY(0));
+  }
+  .fb-like,
+  .twitter-share-button {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px 10px 8px;
+  }
+  input {
+    margin: 8px 10px;
+    font-size: 12px;
+    width: 160px;
+  }
+  .fb-like {
+    min-width: 108px;
+  }
+  &:before {
+    content: "SHARE THIS";
+    font-family: 'Rancho', cursive;
+    font-size: 26px;
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    background: #333;
+    padding: 3px 6px;
+    @include border-radius(6px 6px 0 0);
+    @include box-shadow(0 0 13px #333);
+  }
 }

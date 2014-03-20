@@ -20,28 +20,30 @@
       <label>Image:</label>
       <input type="text" id="img" onClick="this.setSelectionRange(0, this.value.length)"/>
     </span>
+    <span>Puzzle pieces:</span>
     <span>
-      <label>Puzzle pieces: X</label>
+      <label>X</label>
       <input type="number" id="layoutx"/>
     </span>
     <span>
       <label>Y</label>
       <input type="number" id="layouty"/>
     </span>
-    <span>
-      <label>Share:</label>
-      <input type="text" id="share" onClick="this.setSelectionRange(0, this.value.length)"/>
-    </span>
-    <!--<span class="share-btns">
-      <span id="fb-root"></span>
-      <span class="fb-like" data-send="false" data-layout="button_count" data-width="1" data-show-faces="false"></span>
-      <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-text="Check out dragAss(ets) by @shlidor">Tweet</a>
-    </span>-->
   </form>
 
   <iframe id="game" frameBorder="0" src="" width="100%" height="93%">
     <p>Your browser does not support iframes.</p>
   </iframe>
+
+  <div class="share">
+    <div>
+      <label>Share:</label>
+      <input type="text" id="share" onClick="this.setSelectionRange(0, this.value.length)"/>
+    </div>
+    <div id="fb-root"></div>
+    <div class="fb-like" data-href="http://tsi.github.io/puzzled/" data-send="false" data-layout="button_count" data-width="1" data-show-faces="false"></div>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal"  data-text="Make A Puzzle by @shlidor">Tweet</a>
+  </div>
 
   <footer id="scripts">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

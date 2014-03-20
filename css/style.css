@@ -38,13 +38,13 @@ form .title {
   font-size: 36px;
   line-height: 40px;
   vertical-align: middle;
-  margin: 0 15px;
+  margin: 0 30px;
   font-style: italic;
 }
 
 input {
   padding: 3px 6px;
-  margin: 10px;
+  margin: 10px 20px 10px 0;
   font-size: 14px;
   color: #f0eae4;
   background: #444;
@@ -59,4 +59,69 @@ input[type="number"] {
 
 #game {
   margin-top: 3%;
+}
+
+.share {
+  position: fixed;
+  bottom: 0;
+  right: 10%;
+  margin-left: -300px;
+  z-index: 9;
+  width: 280px;
+  font-size: 15px;
+  color: #f0eae4;
+  font-weight: bold;
+  background: #333;
+  -moz-transition: all, 0.4s;
+  -o-transition: all, 0.4s;
+  -webkit-transition: all, 0.4s;
+  transition: all, 0.4s;
+  -moz-transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  -o-transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+  -moz-border-radius: 6px 0 0 0;
+  -webkit-border-radius: 6px;
+  border-radius: 6px 0 0 0;
+  -moz-box-shadow: 0 0 13px #333333;
+  -webkit-box-shadow: 0 0 13px #333333;
+  box-shadow: 0 0 13px #333333;
+}
+.share:hover {
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+.share .fb-like,
+.share .twitter-share-button {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0px 10px 8px;
+}
+.share input {
+  margin: 8px 10px;
+  font-size: 12px;
+  width: 160px;
+}
+.share .fb-like {
+  min-width: 108px;
+}
+.share:before {
+  content: "SHARE THIS";
+  font-family: 'Rancho', cursive;
+  font-size: 26px;
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  background: #333;
+  padding: 3px 6px;
+  -moz-border-radius: 6px 6px 0 0;
+  -webkit-border-radius: 6px;
+  border-radius: 6px 6px 0 0;
+  -moz-box-shadow: 0 0 13px #333333;
+  -webkit-box-shadow: 0 0 13px #333333;
+  box-shadow: 0 0 13px #333333;
 }
