@@ -21,9 +21,10 @@
         opt.imgPath = $('#img').val();
         opt.layoutX = $('#layoutx').val();
         opt.layoutY = $('#layouty').val();
-        src = '../?img=' + opt.imgPath + '&x=' + opt.layoutX + '&y=' + opt.layoutY;
+        attr = '?img=' + opt.imgPath + '&x=' + opt.layoutX + '&y=' + opt.layoutY;
+        $('#share').val('http://tsi.github.io/puzzled/' + attr);
         $('iframe')
-          .attr('src', src)
+          .attr('src', '../' + attr)
           .load(function() {
             $(this).fadeTo('slow', 1);
           });
@@ -44,7 +45,7 @@
 
     setGameDefaults()
 
-    $('form input[type="text"]').keydown(function() {
+    $('form input#img').keydown(function() {
       updateGameSrc();
     });
 
