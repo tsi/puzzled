@@ -16,15 +16,14 @@
         };
 
     function updateGameSrc() {
-      console.log('Updating');
       $('iframe').fadeTo('fast', 0, function() {
         opt.imgPath = $('#img').val();
         opt.layoutX = $('#layoutx').val();
         opt.layoutY = $('#layouty').val();
         attr = '?img=' + opt.imgPath + '&x=' + opt.layoutX + '&y=' + opt.layoutY;
-        $('#share').val('http://tsi.github.io/puzzled/page/' + attr);
+        $('#share').val('http://tsi.github.io/puzzled/' + attr);
         $('iframe')
-          .attr('src', '../' + attr)
+          .attr('src', 'game/' + attr)
           .load(function() {
             $(this).fadeTo('slow', 1);
           });
@@ -62,3 +61,25 @@
   }();
 
 })(jQuery);
+
+// // Async Sharing Buttons (Facebook, Twitter)
+// // http://css-tricks.com/snippets/javascript/async-sharing-buttons-g-facebook-twitter/
+// (function(doc, script) {
+//   var js,
+//       fjs = doc.getElementsByTagName(script)[0],
+//       frag = doc.createDocumentFragment(),
+//       add = function(url, id) {
+//           if (doc.getElementById(id)) {return;}
+//           js = doc.createElement(script);
+//           js.src = url;
+//           id && (js.id = id);
+//           frag.appendChild( js );
+//       };
+
+//     // Facebook SDK
+//     add('//connect.facebook.net/en_US/all.js#xfbml=1&appId=200103733347528', 'facebook-jssdk');
+//     // Twitter SDK
+//     add('//platform.twitter.com/widgets.js');
+
+//     fjs.parentNode.insertBefore(frag, fjs);
+// }(document, 'script'));
