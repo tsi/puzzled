@@ -5,15 +5,6 @@
 
 @import "compass";
 
-@mixin stripes($color: #B99F82) {
-  background-color: $color;
-  background-image: linear-gradient(90deg, rgba(#fff,.07) 50%, transparent 50%),
-  linear-gradient(90deg, rgba(#fff,.13) 50%, transparent 50%),
-  linear-gradient(90deg, transparent 50%, rgba(#fff,.17) 50%),
-  linear-gradient(90deg, transparent 50%, rgba(#fff,.19) 50%);
-  background-size: 13px, 29px, 37px, 53px;
-}
-
 html,
 body,
 .game {
@@ -22,12 +13,7 @@ body,
 }
 
 body {
-  opacity: 0;
   @include transition(opacity, 1s);
-  @include stripes;
-  &.loaded {
-    opacity: 1;
-  }
 }
 
 .game {
@@ -54,7 +40,7 @@ body {
     @include transition(opacity .4s);
     z-index: 2 !important;
     &.ui-state-disabled {
-      @include opacity(.75);
+      opacity: .75;
       @include box-shadow(none);
       z-index: 1 !important;
     }
@@ -62,7 +48,7 @@ body {
       z-index: 3 !important;
     }
     &.game-complete {
-      @include opacity(1);
+      opacity: 1;
     }
   }
   .well-done {
