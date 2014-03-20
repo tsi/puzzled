@@ -51,6 +51,15 @@ form {
     margin: 0 30px;
     font-style: italic;
   }
+  .rand {
+    font-size: 34px;
+    cursor: pointer;
+    line-height: 34px;
+    vertical-align: middle;
+    &:active {
+      color: #ccc;
+    }
+  }
 }
 
 input {

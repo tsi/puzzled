@@ -41,6 +41,15 @@ form .title {
   margin: 0 30px;
   font-style: italic;
 }
+form .rand {
+  font-size: 34px;
+  cursor: pointer;
+  line-height: 34px;
+  vertical-align: middle;
+}
+form .rand:active {
+  color: #ccc;
+}
 
 input {
   padding: 3px 6px;

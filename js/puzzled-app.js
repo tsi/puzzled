@@ -64,6 +64,12 @@
       }, 500);
     });
 
+    $('span.rand').mouseup(function () {
+      typewatch(function () {
+        updateGameSrc();
+      }, 500);
+    });
+
     updateGameSrc();
 
     $(window).load(function() {
