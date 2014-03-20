@@ -22,7 +22,7 @@
         opt.layoutX = $('#layoutx').val();
         opt.layoutY = $('#layouty').val();
         attr = '?img=' + opt.imgPath + '&x=' + opt.layoutX + '&y=' + opt.layoutY;
-        $('#share').val('http://tsi.github.io/puzzled/' + attr);
+        $('#share').val('http://tsi.github.io/puzzled/page/' + attr);
         $('iframe')
           .attr('src', '../' + attr)
           .load(function() {
