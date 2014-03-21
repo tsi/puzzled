@@ -23,13 +23,14 @@
         })();
 
     function updateGameSrc() {
-      $('iframe').fadeTo('fast', 0, function() {
+      console.log('Updating');
+      $('#game').fadeTo('fast', 0, function() {
         opt.imgPath = $('#img').val();
         opt.layoutX = $('#layoutx').val();
         opt.layoutY = $('#layouty').val();
         attr = '?img=' + opt.imgPath + '&x=' + opt.layoutX + '&y=' + opt.layoutY;
         $('#share').val('http://tsi.github.io/puzzled/' + attr);
-        $('iframe')
+        $('#game')
           .attr('src', 'game/' + attr)
           .load(function() {
             $(this).fadeTo('slow', 1);
@@ -65,7 +66,7 @@
     });
 
     $('span.rand').mouseup(function () {
-      $('form input#img').val('');
+      $('form input#img').val();
       typewatch(function () {
         updateGameSrc();
       }, 500);
