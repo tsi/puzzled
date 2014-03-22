@@ -13,43 +13,38 @@
           imgPath: 'http://lorempixel.com/400/400/',
           layoutX: 5,
           layoutY: 5,
-          zoom: 100
+          zoom: 100,
+          rss: 0
         },
         opt = {
           imgPath: getParameterByName('img') || defaults.imgPath,
           layoutX: getParameterByName('x') || defaults.layoutX,
           layoutY: getParameterByName('y') || defaults.layoutY,
-          zoom: getParameterByName('zoom') || defaults.zoom
-        },
-        typewatch = (function(){
-          var timer = 0;
-          return function(callback, ms){
-            clearTimeout (timer);
-            timer = setTimeout(callback, ms);
-          }
-        })();
+          zoom: getParameterByName('zoom') || defaults.zoom,
+          rss: getParameterByName('rss') || defaults.rss
+        };
 
-    function updateGameSrc() {
+    var typewatch = (function(){
+      var timer = 0;
+      return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+      }
+    })();
+
+    var updateGameSrc = function() {
       $('#game').fadeTo('fast', 0, function() {
-        opt.imgPath = $('#img').val();
         opt.layoutX = $('#layoutx').val();
         opt.layoutY = $('#layouty').val();
         opt.zoom = $('#zoom').val();
-        var attr = gameAttr(opt);
-        $('#share').val('http://tsi.github.io/puzzled/' + attr);
-        window.history.pushState(null, null, window.location.protocol + "//" + window.location.host + window.location.pathname + attr);
-        $('#game')
-          .attr('src', 'game/' + attr)
-          .load(function() {
-            $(this).fadeTo('slow', 1);
-          });
+        var attr = setGameAttr();
       })
     }
 
-    function gameAttr(opt) {
+    var setGameAttr = function() {
       var attr = '';
       if (opt.imgPath != defaults.imgPath) {
-        attr += 'img=' + opt.imgPath
+        attr += 'img=' + opt.imgPath;
       }
       if (opt.layoutX != defaults.layoutX) {
         if (attr) attr += '&';
@@ -63,11 +58,26 @@
         if (attr) attr += '&';
         attr += 'zoom=' + opt.zoom;
       }
+      if (opt.rss != defaults.rss) {
+        if (attr) attr += '&';
+        attr += 'rss=' + opt.rss;
+      }
       if (attr) attr = '?' + attr;
-      return attr;
+
+      runGame(attr);
     }
 
-    function setGameDefaults() {
+    var runGame = function(attr) {
+      $('#share').val('http://tsi.github.io/puzzled/' + attr);
+      window.history.pushState(null, null, window.location.protocol + "//" + window.location.host + window.location.pathname + attr);
+      $('#game')
+        .attr('src', 'game/' + attr)
+        .load(function() {
+          $(this).fadeTo('slow', 1);
+        });
+    }
+
+    var setGameDefaults = function() {
       if (!$('#img').val()) {
         $('#img').val(opt.imgPath);
       }

@@ -1,6 +1,8 @@
 
 (function($) {
 
+  var settings = {};
+
   function getParameterByName(name) {
     var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
@@ -90,7 +92,39 @@
     );
   }
 
-  var settings = {};
+  var gameImgFromRss = function() {
+    $.ajax({
+      url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(settings.imgPath),
+      dataType: 'json',
+      error: function() {
+        alert('Could not load ' + settings.imgPath);
+      },
+      success: function(data) {
+        var random = Math.round(Math.random() * data.responseData.feed.entries.length);
+        settings.imgPath = $(data.responseData.feed.entries[random].content).find('img').eq(0).attr('src');
+        getImageDimensions();
+      }
+    });
+  }
+
+  var getImageDimensions = function() {
+    $("<img />").attr("src", settings.imgPath).load(function() {
+      settings.image = {
+        width: this.width * settings.zoom / 100,
+        height: this.height * settings.zoom / 100
+      };
+      $(document).trigger('puzzled');
+    });
+  }
+
+  var getGameImage = function() {
+    if (settings.rss) {
+      gameImgFromRss();
+    }
+    else {
+      getImageDimensions();
+    }
+  }
 
   var puzzled = function(options) {
 
@@ -99,20 +133,14 @@
       layoutX: getParameterByName('x') || 5,
       layoutY: getParameterByName('y') || 5,
       zoom: getParameterByName('zoom') || 100,
-      imgPath: getParameterByName('img') || 'http://lorempixel.com/400/400/'
+      imgPath: getParameterByName('img') || 'http://lorempixel.com/400/400/',
+      rss: getParameterByName('rss') || 0
     };
 
     // Overwrite default options with user provided ones.
     settings = $.extend({}, defaults, options);
 
-    // Get image dimensions
-    $("<img />").attr("src", settings.imgPath).load(function() {
-      settings.image = {
-        width: this.width * settings.zoom / 100,
-        height: this.height * settings.zoom / 100
-      };
-      $(document).trigger('puzzled');
-    });
+    getGameImage();
 
     $(document).bind('puzzled', function() {
 
