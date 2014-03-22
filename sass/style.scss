@@ -48,10 +48,15 @@ form {
     font-size: 36px;
     line-height: 40px;
     vertical-align: middle;
-    margin: 0 30px;
+    margin: 0 20px;
     font-style: italic;
+    cursor: pointer;
+    &:active {
+      color: #ccc;
+    }
   }
   .rand {
+    margin-left: 15px;
     font-size: 34px;
     cursor: pointer;
     line-height: 34px;
@@ -64,21 +69,25 @@ form {
 
 input {
   padding: 3px 6px;
-  margin: 10px 20px 10px 0;
+  margin: 10px 15px 10px 0;
   font-size: 14px;
   color: lighten($baseColor, 30%);
   background: #444;
   border: none;
   &[type="text"] {
-    width: 240px;
+    width: 200px;
   }
   &[type="number"] {
     width: 30px;
   }
+  &#zoom {
+    width: 40px;
+    margin-right: 0;
+  }
 }
 
 #game {
-  margin-top: 3%;
+  margin-top: 40px;
 }
 
 .share {
@@ -112,6 +121,16 @@ input {
   }
   .fb-like {
     min-width: 108px;
+  }
+  .credit {
+    font-weight: normal;
+    padding: 3px 0;
+    background: #222;
+    font-size: 12px;
+    a {
+      color: crimson;
+      text-decoration: none;
+    }
   }
   &:before {
     content: "SHARE THIS";

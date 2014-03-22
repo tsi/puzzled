@@ -37,6 +37,7 @@
         'left': pos.left,
         'background-image': 'url(' + settings.imgPath + ')',
         'background-position': settings.image.width/settings.layoutX * x + 'px ' + settings.image.height/settings.layoutY * y + 'px',
+        'background-size': settings.image.width + 'px ' + settings.image.height + 'px'
       })
       .draggable({
         cursor: 'move',
@@ -79,7 +80,9 @@
                 .wrap('<div class="well-done" />')
                 .parent()
                 .appendTo('.puzzle-solution')
-                .fadeTo('slow', 1);
+                .fadeTo('slow', 1)
+                .delay(2000)
+                .fadeOut('slow');
             }
           }
         }
@@ -95,6 +98,7 @@
     var defaults = {
       layoutX: getParameterByName('x') || 5,
       layoutY: getParameterByName('y') || 5,
+      zoom: getParameterByName('zoom') || 100,
       imgPath: getParameterByName('img') || 'http://lorempixel.com/400/400/'
     };
 
@@ -104,8 +108,8 @@
     // Get image dimensions
     $("<img />").attr("src", settings.imgPath).load(function() {
       settings.image = {
-        width: this.width,
-        height: this.height
+        width: this.width * settings.zoom / 100,
+        height: this.height * settings.zoom / 100
       };
       $(document).trigger('puzzled');
     });

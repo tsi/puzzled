@@ -9,10 +9,17 @@
 
     // Set up defaults
     var src,
+        defaults = {
+          imgPath: 'http://lorempixel.com/400/400/',
+          layoutX: 5,
+          layoutY: 5,
+          zoom: 100
+        },
         opt = {
-          imgPath: getParameterByName('img') || 'http://lorempixel.com/400/400/',
-          layoutX: getParameterByName('x') || 5,
-          layoutY: getParameterByName('y') || 5
+          imgPath: getParameterByName('img') || defaults.imgPath,
+          layoutX: getParameterByName('x') || defaults.layoutX,
+          layoutY: getParameterByName('y') || defaults.layoutY,
+          zoom: getParameterByName('zoom') || defaults.zoom
         },
         typewatch = (function(){
           var timer = 0;
@@ -23,19 +30,41 @@
         })();
 
     function updateGameSrc() {
-      console.log('Updating');
       $('#game').fadeTo('fast', 0, function() {
         opt.imgPath = $('#img').val();
         opt.layoutX = $('#layoutx').val();
         opt.layoutY = $('#layouty').val();
-        attr = '?img=' + opt.imgPath + '&x=' + opt.layoutX + '&y=' + opt.layoutY;
+        opt.zoom = $('#zoom').val();
+        var attr = gameAttr(opt);
         $('#share').val('http://tsi.github.io/puzzled/' + attr);
+        window.history.pushState(null, null, window.location.protocol + "//" + window.location.host + window.location.pathname + attr);
         $('#game')
           .attr('src', 'game/' + attr)
           .load(function() {
             $(this).fadeTo('slow', 1);
           });
       })
+    }
+
+    function gameAttr(opt) {
+      var attr = '';
+      if (opt.imgPath != defaults.imgPath) {
+        attr += 'img=' + opt.imgPath
+      }
+      if (opt.layoutX != defaults.layoutX) {
+        if (attr) attr += '&';
+        attr += 'x=' + opt.layoutX;
+      }
+      if (opt.layoutY != defaults.layoutY) {
+        if (attr) attr += '&';
+        attr += 'y=' + opt.layoutY;
+      }
+      if (opt.zoom != defaults.zoom) {
+        if (attr) attr += '&';
+        attr += 'zoom=' + opt.zoom;
+      }
+      if (attr) attr = '?' + attr;
+      return attr;
     }
 
     function setGameDefaults() {
@@ -47,6 +76,9 @@
       }
       if (!$('#layouty').val()) {
         $('#layouty').val(opt.layoutY);
+      }
+      if (!$('#zoom').val()) {
+        $('#zoom').val(opt.zoom);
       }
     }
 
@@ -65,14 +97,22 @@
       }, 500);
     });
 
-    $('span.rand').mouseup(function () {
-      $('form input#img').val();
+    $('span.rand, .title').mouseup(function () {
+      if ($('form input#img').val().toLowerCase().indexOf("lorempixel") < 0 ) {
+        $('form input#img').val('http://lorempixel.com/400/400/');
+      }
       typewatch(function () {
         updateGameSrc();
       }, 500);
     });
 
     updateGameSrc();
+
+    $('input[type="text"]').mouseup(function() {
+      if (this.selectionStart == this.selectionEnd) {
+        this.setSelectionRange(0, this.value.length);
+      }
+    });
 
     $(window).load(function() {
       $('body').addClass('loaded');
