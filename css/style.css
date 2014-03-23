@@ -1,4 +1,3 @@
-@charset "UTF-8";
 html,
 body {
   height: 100%;
@@ -90,6 +89,9 @@ input#zoom {
 .mobile-collpase {
   display: inline-block;
 }
+.mobile-collpase .mobile-toggle {
+  display: none;
+}
 @media (max-width: 960px) {
   .mobile-collpase {
     position: fixed;
@@ -118,15 +120,16 @@ input#zoom {
     -webkit-border-radius: 0;
     border-radius: 0 0 0 6px;
   }
-  .mobile-collpase:hover, .mobile-collpase:focus {
+  .mobile-collpase.visible {
     -moz-transform: translateX(0);
     -ms-transform: translateX(0);
     -o-transform: translateX(0);
     -webkit-transform: translateX(0);
     transform: translateX(0);
   }
-  .mobile-collpase:before {
-    content: "≡";
+  .mobile-collpase .mobile-toggle {
+    display: block;
+    cursor: pointer;
     font-size: 40px;
     line-height: 40px;
     position: fixed;
@@ -168,7 +171,7 @@ input#zoom {
   -webkit-box-shadow: 0 0 13px #333333;
   box-shadow: 0 0 13px #333333;
 }
-.share:hover {
+.share:hover, .share:focus {
   -moz-transform: translateY(0);
   -ms-transform: translateY(0);
   -o-transform: translateY(0);

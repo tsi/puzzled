@@ -126,6 +126,10 @@
       }
     });
 
+    $('.mobile-toggle').mouseup(function() {
+      $('.mobile-collpase').toggleClass('visible');
+    });
+
     $(window).load(function() {
       $('body').addClass('loaded');
     });

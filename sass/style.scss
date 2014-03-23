@@ -94,6 +94,10 @@ input {
 }
 
 .mobile-collpase {
+  display: inline-block;
+  .mobile-toggle {
+    display: none;
+  }
   @media (max-width: 960px) {
     position: fixed;
     top: 0;
@@ -107,12 +111,12 @@ input {
     @include border-radius(6px 0 0 0);
     @include box-shadow(4px 0 8px #333);
     @include border-radius(0 0 0 6px);
-    &:hover,
-    &:focus {
+    &.visible {
       @include transform(translateX(0));
     }
-    &:before {
-      content: "≡";
+    .mobile-toggle {
+      display: block;
+      cursor: pointer;
       font-size: 40px;
       line-height: 40px;
       position: fixed;
@@ -123,7 +127,6 @@ input {
       height: 40px;
     }
   }
-  display: inline-block;
 }
 
 #game {
@@ -144,7 +147,8 @@ input {
   @include transform(translateY(100%));
   @include border-radius(6px 0 0 0);
   @include box-shadow(0 0 13px #333);
-  &:hover {
+  &:hover,
+  &:focus {
     @include transform(translateY(0));
   }
   .fb-like,
