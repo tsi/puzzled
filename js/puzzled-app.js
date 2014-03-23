@@ -95,10 +95,12 @@
     setGameDefaults()
 
     $('form input#img').keyup(function () {
-      typewatch(function () {
-        // executed only 500 ms after the last keyup event.
-        updateGameSrc();
-      }, 500);
+      if (this.value != opt.imgPath) {
+        typewatch(function () {
+          // executed only 500 ms after the last keyup event.
+          updateGameSrc();
+        }, 500);
+      }
     });
 
     $('form input[type="number"]').change(function () {
