@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html,
 body {
   height: 100%;
@@ -45,15 +46,26 @@ form .title {
 form .title:active {
   color: #ccc;
 }
+@media (max-width: 960px) {
+  form .title {
+    float: left;
+  }
+}
 form .rand {
   margin-left: 15px;
   font-size: 34px;
   cursor: pointer;
-  line-height: 34px;
+  line-height: 40px;
   vertical-align: middle;
 }
 form .rand:active {
   color: #ccc;
+}
+@media (max-width: 960px) {
+  form .rand {
+    float: right;
+    margin-right: 60px;
+  }
 }
 
 input {
@@ -75,6 +87,57 @@ input#zoom {
   margin-right: 0;
 }
 
+.mobile-collpase {
+  display: inline-block;
+}
+@media (max-width: 960px) {
+  .mobile-collpase {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    width: 280px;
+    padding: 0 20px;
+    background: #555;
+    -moz-transition: all, 0.4s;
+    -o-transition: all, 0.4s;
+    -webkit-transition: all, 0.4s;
+    transition: all, 0.4s;
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    -o-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px;
+    border-radius: 6px 0 0 0;
+    -moz-box-shadow: 4px 0 8px #333333;
+    -webkit-box-shadow: 4px 0 8px #333333;
+    box-shadow: 4px 0 8px #333333;
+    -moz-border-radius: 0 0 0 6px;
+    -webkit-border-radius: 0;
+    border-radius: 0 0 0 6px;
+  }
+  .mobile-collpase:hover, .mobile-collpase:focus {
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  .mobile-collpase:before {
+    content: "≡";
+    font-size: 40px;
+    line-height: 40px;
+    position: fixed;
+    right: 100%;
+    top: 0;
+    padding: 0 6px;
+    background: #555;
+    height: 40px;
+  }
+}
+
 #game {
   margin-top: 40px;
 }
@@ -83,7 +146,6 @@ input#zoom {
   position: fixed;
   bottom: 0;
   right: 10%;
-  margin-left: -300px;
   z-index: 9;
   width: 280px;
   font-size: 15px;

@@ -18,7 +18,7 @@ body {
 
 .game {
   position: relative;
-  padding: 40px 30px;
+  padding: 40px 0 0 30px;
   @include box-sizing(border-box);
   .puzzle-solution {
     position: relative;

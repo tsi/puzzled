@@ -54,15 +54,22 @@ form {
     &:active {
       color: #ccc;
     }
+    @media (max-width: 960px) {
+      float: left;
+    }
   }
   .rand {
     margin-left: 15px;
     font-size: 34px;
     cursor: pointer;
-    line-height: 34px;
+    line-height: 40px;
     vertical-align: middle;
     &:active {
       color: #ccc;
+    }
+    @media (max-width: 960px) {
+      float: right;
+      margin-right: 60px;
     }
   }
 }
@@ -86,6 +93,39 @@ input {
   }
 }
 
+.mobile-collpase {
+  @media (max-width: 960px) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    width: 280px;
+    padding: 0 20px;
+    background: #555;
+    @include transition(all, .4s);
+    @include transform(translateX(100%));
+    @include border-radius(6px 0 0 0);
+    @include box-shadow(4px 0 8px #333);
+    @include border-radius(0 0 0 6px);
+    &:hover,
+    &:focus {
+      @include transform(translateX(0));
+    }
+    &:before {
+      content: "≡";
+      font-size: 40px;
+      line-height: 40px;
+      position: fixed;
+      right: 100%;
+      top: 0;
+      padding: 0 6px;
+      background: #555;
+      height: 40px;
+    }
+  }
+  display: inline-block;
+}
+
 #game {
   margin-top: 40px;
 }
@@ -94,7 +134,6 @@ input {
   position: fixed;
   bottom: 0;
   right: 10%;
-  margin-left: -300px;
   z-index: 9;
   width: 280px;
   font-size: 15px;
