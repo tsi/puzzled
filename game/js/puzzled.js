@@ -100,8 +100,9 @@
         alert('Could not load ' + settings.imgPath);
       },
       success: function(data) {
-        var random = Math.round(Math.random() * data.responseData.feed.entries.length);
-        settings.imgPath = $(data.responseData.feed.entries[random].content).find('img').eq(0).attr('src');
+        var random = Math.round(Math.random() * data.responseData.feed.entries.length),
+            img = $(data.responseData.feed.entries[random].content)[0];
+        settings.imgPath = $(img).attr('src');
         getImageDimensions();
       }
     });
