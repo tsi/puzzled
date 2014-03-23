@@ -34,10 +34,11 @@
 
     var updateGameSrc = function() {
       $('#game').fadeTo('fast', 0, function() {
+        opt.imgPath = $('#img').val();
         opt.layoutX = $('#layoutx').val();
         opt.layoutY = $('#layouty').val();
         opt.zoom = $('#zoom').val();
-        var attr = setGameAttr();
+        setGameAttr();
       })
     }
 
@@ -63,7 +64,6 @@
         attr += 'rss=' + opt.rss;
       }
       if (attr) attr = '?' + attr;
-
       runGame(attr);
     }
 
