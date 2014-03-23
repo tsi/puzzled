@@ -108,10 +108,23 @@
   }
 
   var getImageDimensions = function() {
+    var pageHeight = $(document).height() - 60,
+        pageWidth = $(document).width() * 0.7,
+        heightRatio = 1,
+        widthRatio = 1,
+        minRation = 1;
+    console.log(pageHeight);
     $("<img />").attr("src", settings.imgPath).load(function() {
+      if (this.height > pageHeight) {
+        heightRatio = pageHeight / this.height;
+      }
+      if (this.width > pageWidth) {
+        widthRatio = pageWidth / this.width;
+      }
+      minRation = Math.min(heightRatio, widthRatio);
       settings.image = {
-        width: this.width * settings.zoom / 100,
-        height: this.height * settings.zoom / 100
+        width: this.width * minRation * settings.zoom / 100,
+        height: this.height * minRation * settings.zoom / 100
       };
       $(document).trigger('puzzled');
     });
