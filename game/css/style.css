@@ -5,6 +5,7 @@ body,
   width: 100%; }
 
 body {
+  overflow: hidden;
   -moz-transition: opacity, 1s;
   -o-transition: opacity, 1s;
   -webkit-transition: opacity, 1s;
