@@ -50,6 +50,11 @@ form .title:active {
     float: left;
   }
 }
+@media (max-width: 400px) {
+  form .title {
+    font-size: 30px;
+  }
+}
 form .rand {
   margin-left: 15px;
   font-size: 34px;
@@ -63,7 +68,7 @@ form .rand:active {
 @media (max-width: 960px) {
   form .rand {
     float: right;
-    margin-right: 60px;
+    margin-right: 50px;
   }
 }
 
@@ -77,6 +82,11 @@ input {
 }
 input[type="text"] {
   width: 200px;
+}
+@media (max-width: 960px) {
+  input[type="text"] {
+    width: 160px;
+  }
 }
 input[type="number"] {
   width: 30px;
@@ -98,8 +108,8 @@ input#zoom {
     top: 0;
     right: 0;
     z-index: 9;
-    width: 280px;
-    padding: 0 20px;
+    width: 260px;
+    padding: 0 5px 5px 20px;
     background: #555;
     -moz-transition: all, 0.4s;
     -o-transition: all, 0.4s;

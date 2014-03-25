@@ -114,7 +114,6 @@
         heightRatio = 1,
         widthRatio = 1,
         minRation = 1;
-    console.log(pageHeight);
     $("<img />").attr("src", settings.imgPath).load(function() {
       if (this.height > pageHeight) {
         heightRatio = pageHeight / this.height;
