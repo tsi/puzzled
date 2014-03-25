@@ -158,7 +158,7 @@ input {
   @include border-radius(6px 0 0 0);
   @include box-shadow(0 0 13px #333);
   &:hover,
-  &:focus {
+  &.visible {
     @include transform(translateY(0));
   }
   .fb-like,
@@ -185,15 +185,18 @@ input {
       text-decoration: none;
     }
   }
-  &:before {
-    content: "SHARE THIS";
+  .share-toggle {
+    display: block;
     font-family: 'Rancho', cursive;
     font-size: 26px;
     position: absolute;
     bottom: 100%;
     right: 0;
+    color: #fff;
     background: #333;
+    text-decoration: none;
     padding: 3px 6px;
+    z-index: 99;
     @include border-radius(6px 6px 0 0);
     @include box-shadow(0 0 13px #333);
   }

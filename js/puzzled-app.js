@@ -92,8 +92,7 @@
       }
     }
 
-    setGameDefaults()
-
+    // Form listeners
     $('form input#img').keyup(function () {
       if (this.value != opt.imgPath) {
         typewatch(function () {
@@ -118,17 +117,25 @@
       }, 500);
     });
 
+    setGameDefaults()
     updateGameSrc();
 
+    // Auto select
     $('input[type="text"]').mouseup(function() {
       if (this.selectionStart == this.selectionEnd) {
         this.setSelectionRange(0, this.value.length);
       }
     });
 
+    // Toggles
     $('.mobile-toggle').click(function(e) {
       e.preventDefault();
       $('.mobile-collpase').toggleClass('visible');
+    });
+
+    $('.share-toggle').click(function(e) {
+      e.preventDefault();
+      $('.share').toggleClass('visible');
     });
 
     $(window).load(function() {

@@ -155,7 +155,7 @@ input {
   -moz-box-shadow: 0 0 13px #333333;
   -webkit-box-shadow: 0 0 13px #333333;
   box-shadow: 0 0 13px #333333; }
-  .share:hover, .share:focus {
+  .share:hover, .share.visible {
     -moz-transform: translateY(0);
     -ms-transform: translateY(0);
     -o-transform: translateY(0);
@@ -180,15 +180,18 @@ input {
     .share .credit a {
       color: crimson;
       text-decoration: none; }
-  .share:before {
-    content: "SHARE THIS";
+  .share .share-toggle {
+    display: block;
     font-family: 'Rancho', cursive;
     font-size: 26px;
     position: absolute;
     bottom: 100%;
     right: 0;
+    color: #fff;
     background: #333;
+    text-decoration: none;
     padding: 3px 6px;
+    z-index: 99;
     -moz-border-radius: 6px 6px 0 0;
     -webkit-border-radius: 6px;
     border-radius: 6px 6px 0 0;
