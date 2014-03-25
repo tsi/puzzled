@@ -101,37 +101,41 @@ input {
 
 .mobile-collpase {
   display: inline-block;
-  .mobile-toggle {
-    display: none;
-  }
-  @media (max-width: 960px) {
+}
+.mobile-toggle {
+  display: none;
+}
+@media (max-width: 960px) {
+  .mobile-collpase {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     z-index: 9;
     width: 260px;
     padding: 0 5px 5px 20px;
     background: #555;
     @include transition(all, .4s);
-    @include transform(translateX(100%));
-    @include border-radius(6px 0 0 0);
-    @include box-shadow(4px 0 8px #333);
-    @include border-radius(0 0 0 6px);
+    @include box-shadow(-4px 0 8px #333);
+    @include border-radius(0 0 6px 0);
+    @include transform(translateX(-100%));
     &.visible {
       @include transform(translateX(0));
     }
-    .mobile-toggle {
-      display: block;
-      cursor: pointer;
-      font-size: 40px;
-      line-height: 40px;
-      position: fixed;
-      right: 100%;
-      top: 0;
-      padding: 0 6px;
-      background: #555;
-      height: 40px;
-    }
+  }
+  .mobile-toggle {
+    z-index: 99;
+    display: block;
+    font-size: 40px;
+    line-height: 40px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #555;
+    color: #fff;
+    text-decoration: none;
   }
 }
 

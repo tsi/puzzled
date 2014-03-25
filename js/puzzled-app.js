@@ -126,7 +126,8 @@
       }
     });
 
-    $('.mobile-toggle').mouseup(function() {
+    $('.mobile-toggle').click(function(e) {
+      e.preventDefault();
       $('.mobile-collpase').toggleClass('visible');
     });
 
