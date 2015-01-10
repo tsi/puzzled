@@ -10,14 +10,24 @@
 
   function setPosition(width, height) {
     var pos = {},
-        cont = $('.game'),
-        margin = 60;
+        cont = $('.game');
     pos.top = Math.floor((Math.random() * (cont.height() - height)));
-    if (pos.top < (settings.image.height + margin)) {
-      pos.left = Math.floor((Math.random() * (cont.width() - width - settings.image.width - margin))) + settings.image.width + margin;
+    pos.left = Math.floor((Math.random() * (cont.width() - width)));
+    if (pos.top < (settings.image.height)) {
+      if (cont.width() > settings.image.width) {
+        pos.left = Math.floor((Math.random() * (cont.width() - width - settings.image.width))) + settings.image.width;
+      }
+      else {
+        pos.top = Math.floor(Math.random() * (cont.height() - height - settings.image.height)) + settings.image.height;
+      }
     }
-    else {
-      pos.left = Math.floor((Math.random() * (cont.width() - width)));
+    else if (pos.left < (settings.image.width)) {
+      if (cont.height() > settings.image.height) {
+        pos.top = Math.floor((Math.random() * (cont.height() - height - settings.image.height))) + settings.image.height;
+      }
+      else {
+        pos.left = Math.floor((Math.random() * (cont.width() - width - settings.image.width))) + settings.image.width;
+      }
     }
     return pos;
   }
@@ -45,6 +55,7 @@
         cursor: 'move',
         snap: '.puzzle-spot',
         snapMode: 'inner',
+        containment: '.game',
         zIndex: 100
       })
       .appendTo(wrp);
@@ -92,25 +103,56 @@
     );
   }
 
-  var gameImgFromRss = function() {
+  var gameImgFromTmblr = function() {
+
+    // var link = "http://api.tumblr.com/v2/blog/inspirational-images.tumblr.com/posts";
+    var blogName = settings.imgPath.replace(/.*?:\/\//g, "").replace(/\/$/, ""),
+        link = "http://api.tumblr.com/v2/blog/" + blogName + "/posts";
+
     $.ajax({
-      url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(settings.imgPath),
-      dataType: 'json',
-      error: function() {
-        alert('Could not load ' + settings.imgPath);
-      },
-      success: function(data) {
-        var random = Math.round(Math.random() * data.responseData.feed.entries.length),
-            img = $(data.responseData.feed.entries[random].content)[0];
-        settings.imgPath = $(img).attr('src');
-        getImageDimensions();
+      type: "GET",
+      url : link,
+      dataType: "jsonp",
+      data: {
+        api_key: "fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4"
       }
+    }).done(function( data ) {
+
+        var photos,
+            randomImg,
+            randomPost;
+
+        for (var i = data.response.posts.length - 1; i >= 0; i--) {
+          randomPost = Math.floor(Math.random() * data.response.posts.length)
+          // console.log(data.response.posts[randomPost]);
+          if (data.response.posts[randomPost].photos) {
+            photos = data.response.posts[randomPost].photos;
+            // console.log(photos);
+            for (var i = photos.length - 1; i >= 0; i--) {
+              randomImg = Math.floor(Math.random() * photos.length);
+              // console.log(photos[randomImg]);
+              if (photos[randomImg].original_size.url) {
+                settings.imgPath = photos[randomImg].original_size.url;
+                break;
+              }
+            };
+            break;
+          }
+          else {
+            alert('Could not find an image. Try again.');
+          }
+        };
+
+        getImageDimensions();
+
     });
+
   }
 
   var getImageDimensions = function() {
-    var pageHeight = $(document).height() - 60,
-        pageWidth = $(document).width() * 0.7,
+    var widthRatio = $(document).width() > 700 ? 0.7 : 1,
+        pageHeight = $(document).height() - 60,
+        pageWidth = $(document).width() * widthRatio,
         heightRatio = 1,
         widthRatio = 1,
         minRation = 1;
@@ -130,12 +172,15 @@
     });
   }
 
-  var getGameImage = function() {
-    if (settings.rss) {
-      gameImgFromRss();
-    }
-    else {
+  var getGameImage = function(imgPath) {
+    var isImg = /\.(jpg|png|gif)$/.test(imgPath) || imgPath.search("http://lorempixel") >= 0;
+    var isTmblr = imgPath.search("tumblr.com") >= 0;
+    if (isImg) {
       getImageDimensions();
+    }
+    else if (isTmblr) {
+      // http://jsbin.com/sozolajato/1/edit?html,output
+      gameImgFromTmblr();
     }
   }
 
@@ -146,14 +191,13 @@
       layoutX: getParameterByName('x') || 5,
       layoutY: getParameterByName('y') || 5,
       zoom: getParameterByName('zoom') || 100,
-      imgPath: getParameterByName('img') || 'http://lorempixel.com/400/400/',
-      rss: getParameterByName('rss') || 0
+      imgPath: getParameterByName('img') || 'http://lorempixel.com/400/400/'
     };
 
     // Overwrite default options with user provided ones.
     settings = $.extend({}, defaults, options);
 
-    getGameImage();
+    getGameImage(settings.imgPath);
 
     $(document).bind('puzzled', function() {
 

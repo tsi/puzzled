@@ -13,15 +13,13 @@
           imgPath: 'http://lorempixel.com/400/400/',
           layoutX: 5,
           layoutY: 5,
-          zoom: 100,
-          rss: 0
+          zoom: 100
         },
         opt = {
           imgPath: getParameterByName('img') || defaults.imgPath,
           layoutX: getParameterByName('x') || defaults.layoutX,
           layoutY: getParameterByName('y') || defaults.layoutY,
-          zoom: getParameterByName('zoom') || defaults.zoom,
-          rss: getParameterByName('rss') || defaults.rss
+          zoom: getParameterByName('zoom') || defaults.zoom
         };
 
     var typewatch = (function(){
@@ -58,10 +56,6 @@
       if (opt.zoom != defaults.zoom) {
         if (attr) attr += '&';
         attr += 'zoom=' + opt.zoom;
-      }
-      if (opt.rss != defaults.rss) {
-        if (attr) attr += '&';
-        attr += 'rss=' + opt.rss;
       }
       if (attr) attr = '?' + attr;
       runGame(attr);
@@ -109,9 +103,6 @@
     });
 
     $('span.rand, .title').mouseup(function () {
-      if ($('form input#img').val().toLowerCase().indexOf("lorempixel") < 0 ) {
-        $('form input#img').val('http://lorempixel.com/400/400/');
-      }
       typewatch(function () {
         updateGameSrc();
       }, 500);

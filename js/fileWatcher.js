@@ -22,7 +22,8 @@
   // Modify the path to the watched file
   // You can call watch() multiple times
   $(document).ready(function() {
-    $(document).watch('css/style.css');
+    // $(document).watch('css/style.css');
+    $(document).watch('game/js/puzzled.js');
   });
 
   $.fn.extend({

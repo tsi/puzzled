@@ -19,19 +19,23 @@ body {
 
 .game {
   position: relative;
-  padding: 40px 0 0 30px;
   @include box-sizing(border-box);
+  @media (min-width: 700px) {
+    padding: 40px 0 0 30px;
+  }
   .puzzle-solution {
     position: relative;
-    border: 7px solid transparent;
-    background: #fff;
-    @include background-clip(padding-box);
-    @include box-shadow(0px 0px 8px rgba(#000, .7) inset, 0px 0px 15px rgba(#000, .7));
-    @include border-radius(5px);
+    background: rgba(#fff, .6);
+    @media (min-width: 700px) {
+      border: 7px solid transparent;
+      @include box-shadow(0px 0px 8px rgba(#000, .7) inset, 0px 0px 15px rgba(#000, .7));
+      @include border-radius(5px);
+      @include background-clip(padding-box);
+    }
   }
   .puzzle-spot {
     @include box-sizing(border-box);
-    border: 3px double #d0d0d0;
+    border: 3px double #aaa;
     display: inline-block;
     vertical-align: top;
   }
