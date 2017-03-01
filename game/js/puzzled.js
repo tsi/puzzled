@@ -9,6 +9,7 @@
   }
 
   function setPosition(width, height) {
+
     var pos = {},
         cont = $('.game');
     pos.top = Math.floor((Math.random() * (cont.height() - height)));
@@ -118,32 +119,24 @@
       }
     }).done(function( data ) {
 
-        var photos,
-            randomImg,
-            randomPost;
+      var posts,
+          photos,
+          randomImg,
+          randomPost;
 
-        for (var i = data.response.posts.length - 1; i >= 0; i--) {
-          randomPost = Math.floor(Math.random() * data.response.posts.length)
-          // console.log(data.response.posts[randomPost]);
-          if (data.response.posts[randomPost].photos) {
-            photos = data.response.posts[randomPost].photos;
-            // console.log(photos);
-            for (var i = photos.length - 1; i >= 0; i--) {
-              randomImg = Math.floor(Math.random() * photos.length);
-              // console.log(photos[randomImg]);
-              if (photos[randomImg].original_size.url) {
-                settings.imgPath = photos[randomImg].original_size.url;
-                break;
-              }
-            };
-            break;
-          }
-          else {
-            alert('Could not find an image. Try again.');
-          }
-        };
+      posts = data.response.posts.filter(function (post) {
+        return post.type == "photo";
+      });
 
-        getImageDimensions();
+      try {
+        randomPost = posts[Math.floor(Math.random() * posts.length)];
+        randomImg = randomPost.photos[Math.floor(Math.random() * randomPost.photos.length)];
+        settings.imgPath = randomImg.original_size.url;
+      } catch (error) {
+        alert('Could not find an image. Try again.');
+      }
+
+      getImageDimensions();
 
     });
 
@@ -155,7 +148,7 @@
         pageWidth = $(document).width() * widthRatio,
         heightRatio = 1,
         widthRatio = 1,
-        minRation = 1;
+        minRatio = 1;
     $("<img />").attr("src", settings.imgPath).load(function() {
       if (this.height > pageHeight) {
         heightRatio = pageHeight / this.height;
@@ -163,10 +156,11 @@
       if (this.width > pageWidth) {
         widthRatio = pageWidth / this.width;
       }
-      minRation = Math.min(heightRatio, widthRatio);
+      minRatio = Math.min(heightRatio, widthRatio);
       settings.image = {
-        width: this.width * minRation * settings.zoom / 100,
-        height: this.height * minRation * settings.zoom / 100
+        // Allow zooming only if image is smaller then page.
+        width: this.width * (minRatio == 1 ? settings.zoom / 100 : minRatio),
+        height: this.height * (minRatio == 1 ? settings.zoom / 100 : minRatio)
       };
       $(document).trigger('puzzled');
     });
