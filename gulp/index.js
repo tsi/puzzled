@@ -6,8 +6,10 @@ var notify = require("gulp-notify");
 global.paths = {
   appScss: 'sass',
   appCss: 'css',
+  appJs: 'js',
   gameScss: 'game/sass',
-  gameCss: 'game/css'
+  gameCss: 'game/css',
+  gameJs: 'game/js'
 };
 
 
